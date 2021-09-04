@@ -1,7 +1,9 @@
+import 'package:burc_rehberi/burc_item.dart';
 import 'package:burc_rehberi/data/strings.dart';
 import 'package:burc_rehberi/model/burc.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class BurcList extends StatelessWidget {
     late List<Burc> allBurcs;
 
@@ -16,9 +18,7 @@ class BurcList extends StatelessWidget {
       appBar: AppBar(title: Text('Burç Listesi')),
       body: Center(
         child: ListView.builder(itemBuilder: (context,index){
-          return Container(
-
-          );
+          return BurcItem(atBurc: allBurcs[index]);
         }, itemCount: allBurcs.length,),
       ),
     );
