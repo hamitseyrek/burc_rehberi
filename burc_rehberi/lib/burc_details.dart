@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
 
@@ -18,7 +19,7 @@ late PaletteGenerator _generator;
 @override
   void initState() {
     super.initState();
-    findAppColor();
+    WidgetsBinding.instance!.addPostFrameCallback((_)=>findAppColor());
   }
 
   @override
