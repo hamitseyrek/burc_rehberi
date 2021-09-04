@@ -5,21 +5,23 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class BurcList extends StatelessWidget {
-    late List<Burc> allBurcs;
+  late List<Burc> allBurcs;
 
-   BurcList(){
-     allBurcs = setDatas();
-   }
-
+  BurcList() {
+    allBurcs = setDatas();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Burç Listesi')),
       body: Center(
-        child: ListView.builder(itemBuilder: (context,index){
-          return BurcItem(atBurc: allBurcs[index]);
-        }, itemCount: allBurcs.length,),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return BurcItem(atBurc: allBurcs[index]);
+          },
+          itemCount: allBurcs.length,
+        ),
       ),
     );
   }
@@ -27,7 +29,15 @@ class BurcList extends StatelessWidget {
   List<Burc> setDatas() {
     List<Burc> _temp = [];
     for (var i = 0; i < 12; i++) {
-      Burc addBurc = Burc(Strings.BURC_ADLARI[i],Strings.BURC_TARIHLERI[i],Strings.BURC_GENEL_OZELLIKLERI[i],Strings.BURC_ADLARI[i].toLowerCase()+'_buyuk'+(i+1).toString()+'.png',Strings.BURC_ADLARI[i].toLowerCase()+(i+1).toString()+'.png');
+      Burc addBurc = Burc(
+          Strings.BURC_ADLARI[i],
+          Strings.BURC_TARIHLERI[i],
+          Strings.BURC_GENEL_OZELLIKLERI[i],
+          Strings.BURC_ADLARI[i].toLowerCase() +
+              '_buyuk' +
+              (i + 1).toString() +
+              '.png',
+          Strings.BURC_ADLARI[i].toLowerCase() + (i + 1).toString() + '.png');
       _temp.add(addBurc);
     }
     return _temp;

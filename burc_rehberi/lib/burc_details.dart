@@ -6,20 +6,20 @@ import 'model/burc.dart';
 
 class BurcDetail extends StatefulWidget {
   final Burc selectedBurc;
-  const BurcDetail({ required this.selectedBurc, Key? key }) : super(key: key);
+  const BurcDetail({required this.selectedBurc, Key? key}) : super(key: key);
 
   @override
   _BurcDetailState createState() => _BurcDetailState();
 }
 
 class _BurcDetailState extends State<BurcDetail> {
-Color colorOfAppbar = Colors.teal;
-late PaletteGenerator _generator;
+  Color colorOfAppbar = Colors.teal;
+  late PaletteGenerator _generator;
 
-@override
+  @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_)=>findAppColor());
+    WidgetsBinding.instance!.addPostFrameCallback((_) => findAppColor());
   }
 
   @override
@@ -27,34 +27,46 @@ late PaletteGenerator _generator;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-        SliverAppBar(
-          expandedHeight: 250,
-        pinned: true,
-        backgroundColor: colorOfAppbar,
-        flexibleSpace: FlexibleSpaceBar(          
-          title: Text(widget.selectedBurc.burcName),
-          background: Image.asset('assets/images/'+widget.selectedBurc.burcImage,fit: BoxFit.cover,),
-        ),
-        ),
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              ListTile(title: Text(widget.selectedBurc.burcDate, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold),),),
-              Card(
-                child: ListTile(subtitle: Text(widget.selectedBurc.burcDetails),),
-              )
-            ],
+          SliverAppBar(
+            expandedHeight: 250,
+            pinned: true,
+            backgroundColor: colorOfAppbar,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(widget.selectedBurc.burcName),
+              background: Image.asset(
+                'assets/images/' + widget.selectedBurc.burcImage,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        )
-      ],
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    widget.selectedBurc.burcDate,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    subtitle: Text(widget.selectedBurc.burcDetails),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
 
   void findAppColor() async {
-      _generator = await PaletteGenerator.fromImageProvider(AssetImage('assets/images/'+widget.selectedBurc.burcImage));
-      setState(() {
-        colorOfAppbar = _generator.dominantColor!.color;
-      });
-}
+    _generator = await PaletteGenerator.fromImageProvider(
+        AssetImage('assets/images/' + widget.selectedBurc.burcImage));
+    setState(() {
+      colorOfAppbar = _generator.dominantColor!.color;
+    });
+  }
 }
